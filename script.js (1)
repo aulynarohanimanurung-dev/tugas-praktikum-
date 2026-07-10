@@ -1,0 +1,56 @@
+function showPage(pageId) {
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(section => {
+        section.classList.remove('active-section');
+    });
+    
+    const targetSection = document.getElementById(pageId);
+    if (targetSection) {
+        targetSection.classList.add('active-section');
+    }
+}
+
+const guestForm = document.getElementById('guestForm');
+const guestName = document.getElementById('guestName');
+const guestList = document.getElementById('guestList');
+
+if (guestForm) {
+    guestForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const nameValue = guestName.value.trim();
+        if (nameValue === '') return;
+
+        const waktuSekarang = new Date().toLocaleString();
+
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-light border d-flex justify-content-between align-items-center mb-2';
+        
+        alertDiv.innerHTML = `
+            <span class="badge bg-info text-dark p-2">${waktuSekarang}</span>
+            <span class="fw-bold">${nameValue}</span>
+        `;
+
+        guestList.appendChild(alertDiv);
+        guestName.value = '';
+    });
+}
+
+const loginForm = document.getElementById('loginForm');
+const statusMessage = document.getElementById('statusMessage');
+
+if (loginForm) {
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const usernameInput = document.getElementById('username').value;
+        const passwordInput = document.getElementById('password').value;
+
+        const usernameBenar = "viona pratiwi";
+        const passwordBenar = "123";
+
+        if (usernameInput === usernameBenar && passwordInput === passwordBenar) {
+            statusMessage.textContent = "Login Sukses";
+        } else {
+            statusMessage.textContent = "Username atau Password Salah";
+        }
+    });
+}
